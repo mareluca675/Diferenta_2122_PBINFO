@@ -1,0 +1,51 @@
+#include <fstream>
+#include <vector>
+
+using namespace std;
+
+int n, m;
+
+int main()
+{
+    ifstream cin("diferenta.in");
+    ofstream cout("diferenta.out");
+
+    int mat[101][101];
+    int pp[201];
+
+    for (int i = 1; i <= 200; i++) {
+        pp[i] = i * i;
+    }
+
+    int nr[101][101];
+    cin >> n >> m;
+
+    for (int i = 1; i <= n; i++) {
+        for (int j = 1; j <= m; j++) {
+            cin >> mat[i][j];
+            nr[i][j] = 0;
+        }
+    }
+
+    for (int i = 1; i <= n; i++) {
+        for (int j = 1; j <= m; j++) {
+            for(int k = 1; k * k <= mat[i][j]; k ++){
+                if(mat[i][j] % k == 0){
+                    if((k % 2) == (mat[i][j] / k % 2)){
+                        nr[i][j] ++;
+                    }
+                }
+            }   
+        }
+    }
+
+    for (int i = 1; i <= n; i++) {
+        for (int j = 1; j <= m; j++) {
+            cout << nr[i][j] << ' ';
+        }
+
+        cout << '\n';
+    }
+
+    return 0;
+}
